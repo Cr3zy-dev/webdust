@@ -73,5 +73,4 @@ GNU GPLv3, see [LICENSE](LICENSE)
 
 ## 🎯 Author
 
-Created by [Cr3zy](https://github.com/Cr3zy-dev)
-WebDust Copyright (C) 2025  Cr3zy
+Created by [Cr3zy](https://github.com/Cr3zy-dev) - WebDust Copyright (C) 2025  Cr3zy
