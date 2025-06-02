@@ -60,8 +60,8 @@ python webdust.py -u https://example.com [options]
 
 ## 📸 Screenshot
 
-![image](https://github.com/user-attachments/assets/af362796-7869-4112-b1a5-23d0569117ab)
-![image](https://github.com/user-attachments/assets/663c85bb-518a-4cd2-99eb-10fdff5344f4)
+![image](https://github.com/user-attachments/assets/882a3b0d-8827-4bd2-a6af-fa725435aad8)
+![image](https://github.com/user-attachments/assets/02811178-0c8a-479a-98bd-f1103063be7e)
 
 ---
 
