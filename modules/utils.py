@@ -25,7 +25,7 @@ def print_banner(formatter):
  \        /\  ___/| \_\ \    `   \|  |  \___ \|   __\\
   \__/\  /  \___  >___  /_______  /____//____ >___|
        \/       \/    \/        \/           \/     
-                                                 v1.0
+                                                 v1.1
     """
     
     formatter._clear_progress()
