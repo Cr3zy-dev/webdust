@@ -60,13 +60,6 @@ python webdust.py -u https://example.com [options]
 
 ---
 
-## 📸 Screenshot
-
-![image](https://github.com/user-attachments/assets/6d6afe37-82f6-4df5-918c-09eafa0d0cd5)
-![image](https://github.com/user-attachments/assets/2c0a1dc5-6e95-4672-82d5-0d7ddf9c46e1)
-
----
-
 ### 📂 `wordlists/` Directory
 
 The `wordlists/` folder included in this repository is provided as a **template**.  
@@ -98,6 +91,14 @@ python webdust.py -w
 and provide new paths or press Enter to use the hardcoded ones.
 
 ---
+
+## 📸 Screenshot
+
+![image](https://github.com/user-attachments/assets/6d6afe37-82f6-4df5-918c-09eafa0d0cd5)
+![image](https://github.com/user-attachments/assets/2c0a1dc5-6e95-4672-82d5-0d7ddf9c46e1)
+
+---
+
 
 ## 📜 License
 
