@@ -70,7 +70,7 @@ python webdust.py -u https://example.com [options]
 ### 📂 `wordlists/` Directory
 
 The `wordlists/` folder included in this repository is provided as a **template**.  
-⚠️ **It is not used by default in the scanning process, unless u configured the paths.**
+⚠️ **It is not used by default in the scanning process, unless you have configured the paths.**
 
 WebDust uses **internally hardcoded parameter keywords** for vulnerability detection (such as `id`, `file`, `query`, etc.).  
 The files in `wordlists/` are meant for **reference** but **I recommend to use them**.
