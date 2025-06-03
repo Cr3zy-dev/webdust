@@ -20,7 +20,7 @@ def parse_arguments():
         formatter_class=argparse.RawTextHelpFormatter
     )
     
-    parser.add_argument("-u", "--url", required=True,
+    parser.add_argument("-u", "--url",
                         help="Target URL to scan (e.g., https://example.com)")
     parser.add_argument("-d", "--depth", type=int, default=2,
                         help="Crawl depth (default: 2)")
