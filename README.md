@@ -90,9 +90,11 @@ python webdust.py -w
 ```
 and provide new paths or press Enter to use the hardcoded ones.
 
+**I do recommend to use wordlists, but it is not necessary.**
+
 ---
 
-## 📸 Screenshot
+## 📸 Screenshots
 
 ![image](https://github.com/user-attachments/assets/6d6afe37-82f6-4df5-918c-09eafa0d0cd5)
 ![image](https://github.com/user-attachments/assets/2c0a1dc5-6e95-4672-82d5-0d7ddf9c46e1)
