@@ -1,22 +1,77 @@
 from urllib.parse import urlparse, parse_qs
 from typing import List, Dict, Set
+import os
 
 class Analyzer:
     """Analyzes discovered URLs for potential vulnerabilities."""
     
-    def __init__(self, formatter):
+    def __init__(self, formatter, wordlist_config=None):
         self.formatter = formatter
+        self.wordlist_config = wordlist_config or {}
         
-        # Define parameter patterns for classification
-        self.idor_patterns = {'id', 'user_id', 'account_id', 'uuid', 'guid', 'userid'}
-        self.lfi_patterns = {'file', 'path', 'lang', 'page', 'include', 'dir', 'folder', 'template'}
-        self.redirect_patterns = {'url', 'redirect', 'next', 'redir', 'return', 'to', 'goto', 'link'}
-        self.xss_patterns = {'q', 'query', 'search', 'keyword', 'name', 'message', 'input', 'content'}
-        self.sqli_patterns = {'category', 'sort', 'order', 'filter', 'where', 'select'}
+        # Define default parameter patterns for classification
+        self.default_idor_patterns = {'id', 'user_id', 'account_id', 'uuid', 'guid', 'userid'}
+        self.default_lfi_patterns = {'file', 'path', 'lang', 'page', 'include', 'dir', 'folder', 'template'}
+        self.default_redirect_patterns = {'url', 'redirect', 'next', 'redir', 'return', 'to', 'goto', 'link'}
+        self.default_xss_patterns = {'q', 'query', 'search', 'keyword', 'name', 'message', 'input', 'content'}
+        self.default_sqli_patterns = {'category', 'sort', 'order', 'filter', 'where', 'select'}
+        
+        # Load and merge custom wordlists with defaults
+        self.idor_patterns = self._load_patterns('idor', self.default_idor_patterns)
+        self.lfi_patterns = self._load_patterns('lfi', self.default_lfi_patterns)
+        self.redirect_patterns = self._load_patterns('redir', self.default_redirect_patterns)
+        self.xss_patterns = self._load_patterns('xss', self.default_xss_patterns)
+        self.sqli_patterns = self._load_patterns('sqli', self.default_sqli_patterns)
+        
+    def _load_patterns(self, category: str, default_patterns: Set[str]) -> Set[str]:
+        """Load patterns from wordlist file and merge with defaults."""
+        patterns = default_patterns.copy()
+        
+        if category not in self.wordlist_config:
+            return patterns
+            
+        wordlist_path = self.wordlist_config[category]
+        
+        if not os.path.isfile(wordlist_path):
+            self.formatter.print_warning(f"Custom {category.upper()} wordlist not found: {wordlist_path}")
+            return patterns
+            
+        try:
+            with open(wordlist_path, 'r', encoding='utf-8') as f:
+                custom_patterns = set()
+                for line in f:
+                    line = line.strip().lower()
+                    if line and not line.startswith('#'):  # Skip empty lines and comments
+                        custom_patterns.add(line)
+                        
+                if custom_patterns:
+                    patterns.update(custom_patterns)
+                    self.formatter.print_success(f"Loaded {len(custom_patterns)} custom {category.upper()} patterns")
+                else:
+                    self.formatter.print_warning(f"No valid patterns found in {category.upper()} wordlist")
+                    
+        except Exception as e:
+            self.formatter.print_error(f"Failed to load {category.upper()} wordlist: {str(e)}")
+            
+        return patterns
         
     def analyze_urls(self, discovered_urls: List[Dict]) -> List[Dict]:
         """Analyze all discovered URLs for potential vulnerabilities."""
         self.formatter.print_status(f"Analyzing {len(discovered_urls)} discovered URLs...")
+        
+        # Print pattern statistics
+        total_default = (len(self.default_idor_patterns) + len(self.default_lfi_patterns) + 
+                        len(self.default_redirect_patterns) + len(self.default_xss_patterns) + 
+                        len(self.default_sqli_patterns))
+        total_current = (len(self.idor_patterns) + len(self.lfi_patterns) + 
+                        len(self.redirect_patterns) + len(self.xss_patterns) + 
+                        len(self.sqli_patterns))
+        
+        if total_current > total_default:
+            custom_count = total_current - total_default
+            self.formatter.print_info(f"Using {total_current} patterns ({total_default} default + {custom_count} custom)")
+        else:
+            self.formatter.print_info(f"Using {total_current} default patterns")
         
         results = []
         
