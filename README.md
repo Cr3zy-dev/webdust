@@ -50,7 +50,7 @@ python webdust.py -u https://example.com [options]
 
 | Flag                  | Description                                                 |
 |---------------------- |------------------------------------------------------------ |
-| `-u, --url`           | Target URL to scan (**required**)                           |
+| `-u, --url`           | Target URL to scan                                          |
 | `-d, --depth`         | Crawl depth (default: 2)                                    |
 | `-o, --output`        | Save results to a file                                      |
 | `-v, --verbose`       | Enable verbose/debug output                                 |
