@@ -12,7 +12,7 @@ class Crawler:
         self.verbose = verbose
         self.session = requests.Session()
         self.session.headers.update({
-            'User-Agent': 'WebDust/1.0 (+https://github.com/Cr3zy-dev/webdust)'
+            'User-Agent': 'WebDust/1.1 (+https://github.com/Cr3zy-dev/webdust)'
         })
         self.visited: Set[str] = set()
         self.discovered_urls: List[Dict] = []
